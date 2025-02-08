@@ -7,7 +7,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 4005;
 
 app.use(express.json());
-app.use("/todos", todoRoutes);
+app.use("/api", todoRoutes);
 
 // Create a new todo
 
