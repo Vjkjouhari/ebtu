@@ -12,7 +12,7 @@ app.use("/todos", todoRoutes);
 // Create a new todo
 
 // Get all todos
-app.get("/todos", async (req, res) => {
+app.get("/api", async (req, res) => {
   try {
     const querySnapshot = await getDocs(todoCollection);
     const todos = querySnapshot.docs.map((doc) => ({
