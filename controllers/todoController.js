@@ -90,8 +90,32 @@ const getTodo = async (req, res) => {
   }
 };
 
+const getAllTodos = async (req, res) => {
+  const isExits = await checkDb("todos");
+  try {
+    if (!isExits) {
+      res.status(400).send({
+        message: `Something Went Wrong with Database`,
+      });
+    }
+
+    const allTodo = await getDocs(todoCollection);
+    const todos = allTodo.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    res.status(200).send({
+      message: `Todo fetched successfully`,
+      data: todos,
+    });
+  } catch (error) {
+    res.status(400).send(`Error creating todo: ${error.message}`);
+  }
+};
+
 module.exports = {
   addTodo,
   editTodo,
   getTodo,
+  getAllTodos,
 };
